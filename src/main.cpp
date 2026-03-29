@@ -1,6 +1,8 @@
-#include <iostream>
+#include "server.h"
 
-int main() {
-    std::cout << "mini-redis starting on port 6380\n";
+int main()
+{
+    redis::Server server(6380);
+    server.start();
     return 0;
 }
