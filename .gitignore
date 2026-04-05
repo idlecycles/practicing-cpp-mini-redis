@@ -45,3 +45,6 @@ build/
 
 # cache
 .cache/
+
+# system files
+.DS_STORE
