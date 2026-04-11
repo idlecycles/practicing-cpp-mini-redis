@@ -23,7 +23,7 @@ redis-cli -p 6380
 ## What's in scope
 - TCP server with RESP protocol parsing
 - In-memory key-value store
-- Thread-safe concurrent client handling (coming soon)
+- Thread-safe concurrent client handling
 - Key expiration with TTL (coming soon)
 
 ## Out of scope

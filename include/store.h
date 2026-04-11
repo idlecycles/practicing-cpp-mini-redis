@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <optional>
+#include <mutex>
+#include <shared_mutex>
 
 namespace redis
 {
@@ -16,6 +18,7 @@ namespace redis
             std::vector<std::string> keys() const;
 
         private:
+            mutable std::shared_mutex d_mutex;
             std::unordered_map<std::string, std::string> d_store;
     };
 

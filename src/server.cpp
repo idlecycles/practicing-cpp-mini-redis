@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <thread>
 
 namespace redis
 {
@@ -49,19 +50,22 @@ namespace redis
                 continue;
             }
 
-            char buffer[1024];
-            while (true)
+            std::thread([this, client_fd]()
             {
-                int bytes = read(client_fd, buffer, sizeof(buffer));
-                if (bytes <= 0)
-                    break;
-
-                std::string raw(buffer, bytes);
-                std::vector<std::string> commands = parse_resp(raw);
-                std::string response = handle_command(commands, store);
-                write(client_fd, response.c_str(), response.size());
-            }
-            close(client_fd);
+                char buffer[1024];
+                while (true)
+                {
+                    int bytes = read(client_fd, buffer, sizeof(buffer));
+                    if (bytes <= 0)
+                        break;
+    
+                    std::string raw(buffer, bytes);
+                    std::vector<std::string> commands = parse_resp(raw);
+                    std::string response = handle_command(commands, store);
+                    write(client_fd, response.c_str(), response.size());
+                }
+                close(client_fd); 
+            }).detach();
         }
     }
 } // namespace redis
