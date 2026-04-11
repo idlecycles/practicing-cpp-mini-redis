@@ -68,4 +68,4 @@ namespace redis
             close(client_fd);
         }
     }
-}
+} // namespace redis
