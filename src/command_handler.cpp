@@ -37,6 +37,11 @@ namespace redis
             }
             return response;
         }
+        else if (command == "EXPIRE")
+        {
+            store.expire(parsed_command[1], std::chrono::seconds(std::stoi(parsed_command[2])));
+            return "+OK\r\n";
+        }
         else if (command == "COMMAND")
         {
             return "+OK\r\n";
