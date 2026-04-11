@@ -24,7 +24,7 @@ redis-cli -p 6380
 - TCP server with RESP protocol parsing
 - In-memory key-value store
 - Thread-safe concurrent client handling
-- Key expiration with TTL (coming soon)
+- Key expiration with TTL
 
 ## Out of scope
 - Persistence (no RDB/AOF)
