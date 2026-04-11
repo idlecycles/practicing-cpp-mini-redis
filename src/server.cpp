@@ -1,5 +1,6 @@
 #include "server.h"
 #include "resp_parser.h"
+#include "command_handler.h"
 
 #include <iostream>
 #include <stdexcept>
@@ -57,12 +58,7 @@ namespace redis
 
                 std::string raw(buffer, bytes);
                 std::vector<std::string> commands = parse_resp(raw);
-                for (const auto &cmd : commands)
-                {
-                    std::cout << cmd << "\n";
-                }
-
-                std::string response = "+OK\r\n";
+                std::string response = handle_command(commands, store);
                 write(client_fd, response.c_str(), response.size());
             }
             close(client_fd);

@@ -7,6 +7,6 @@
 
 namespace redis
 {
-    std::string command_handler(const std::vector<std::string> &parsed_command, Store &store);
+    std::string handle_command(const std::vector<std::string> &parsed_command, Store &store);
 
 } // namespace redis
